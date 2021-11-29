@@ -1,14 +1,14 @@
 # Time Series Forecasting
 ## Summary
-Boston_Crime_Forecasting is forecasting Boston crime data. Part two is based on two real, but unknown equity markets. The original code was done as part of a coding assesment. 
+This repository contains two notebooks based on three data sets. Boston_Crime_Forecasting is forecasting Boston crime data using a SARIMAX model. Equity_Forecasting is based on two real, but unknown equity markets. The original code was done as part of a coding assesment. 
 
-### <u>Part 1</u>
+### <u>Boston Crime Forecasting</u>
 The primary challenge in this section is the very long forecast time. Most methods and algorithms will go astray when trying to predict this far out. The data contained several features that were largely irrelevant for the task, and some manipulation was required to get the data into a useful format. 
 
 Analysis of the finalized data revealed a time series comprised of trend, season, and residual components. This, in addition to the long prediction window, led me to choose an ARIMA-based model, SARIMA(Seasonal ARIMA), specifically Statsmodels’ SARIMAX.
 A grid search was conducted to find the optimal parameters of the SARIMAX model and then manual tuning was used to achieve the desired results.
 
-### <u>Part 2</u>
+### <u>Equity Forecasting</u>
 Market1 and Market 2 were very similar datasets. The data required very little manipulation, which is typical for financial data. The only steps performed were to split the data (75/25) and normalize the data. I initially winsorized the data at the .01/.99 percentiles, but many of the entities were clipped for the majority of the validation data. This clipping did yield a significant improvement in MSE on the validation set but would have led to very poor forecasting results due to the data being constant for several periods. 
 
 The data was converted into rolling 50-day windows with one prediction per window for training and evaluating the models. This method retains the time-series nature of the data and accurately mimics real-world time series forecasting.
