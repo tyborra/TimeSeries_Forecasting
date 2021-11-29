@@ -13,9 +13,7 @@ Market1 and Market 2 were very similar datasets. The data required very little m
 
 The data was converted into rolling 50-day windows with one prediction per window for training and evaluating the models. This method retains the time-series nature of the data and accurately mimics real-world time series forecasting.
 
-The final predictions were made using an autoregressive method with the same rolling 50 period window making one prediction at a time. The prediction is added to the data to make the next prediction.
-![autregressive.jfif](attachment:autregressive.jfif)
-
+The final predictions were made using an autoregressive method with the same rolling 50 period window making one prediction at a time. The prediction is added to the data to make the next prediction.![autoregressive.jfif](attachment:autoregressive.jfif)
 
 ### <u>Market 1</u>
 I chose to use an LSTM RNN implemented with TensorFlow for Market 1. The architecture consisted of four LSTM layers, each with dropout, a dense output layer, and rmsprop as the optimizer. The result was a mean MSE of ~0.08 on the validation data for all entities, reasonable for the scope of this project. The model appears as though it performed well on the 20 day forecast window.
