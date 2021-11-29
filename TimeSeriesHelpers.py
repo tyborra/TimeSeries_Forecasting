@@ -1,15 +1,22 @@
 # -*- coding: utf-8 -*-
 """
 Created on Wed Sep  1 10:35:24 2021
-@author: ME
+@author: Tyler Borras
 
 -display_df(df, n_rows = 5)
 -nan_check(df)
 -print_unique(df)
 -plot_decomposition(df)
 -sarimax_grid_search(ts, max_iter, n_season, n_pdq = 3)
+-perc_chng(df, periods = 1)
+-create_time_dict(train_df, val_df = None , win_len = 50, create_val = True)
+-fit_model_dict(model, train_dict, epochs, batch_size)
+-validate_model_dict(model, val_dict, train_std, train_mean, plot_results = True)
+-forecast_dict(model, train_dict, start_date, n_forecast = 20)
 
 """
+
+
 import pandas as pd
 import itertools
 import warnings
@@ -292,7 +299,21 @@ def create_time_dict(train_df, val_df = None , win_len = 50, create_val = True):
     
 
 def fit_model_dict(model, train_dict, epochs, batch_size):
+    '''
     
+
+    Parameters
+    ----------
+    model : TF model
+    train_dict : dict of traiiniing data
+    epochs : num epochs
+    batch_size : batch size
+
+    Returns
+    -------
+    model : fitted model
+
+    '''
     for ent in train_dict:
         print("Fitting ", ent)
         model.fit(train_dict[ent]["X"], train_dict[ent]["y"], 
@@ -302,6 +323,23 @@ def fit_model_dict(model, train_dict, epochs, batch_size):
 
 
 def validate_model_dict(model, val_dict, train_std, train_mean, plot_results = True):
+    '''
+    
+
+    Parameters
+    ----------
+    model : Fitted TF model
+    val_dict : validation dict
+    train_std : standard deviiation of training data
+    train_mean : mean of traiining data
+    plot_results : Boolean to plot results
+        DESCRIPTION. The default is True.
+
+    Returns
+    -------
+    None.
+
+    '''
     pred_result = {}
     overall_MSE = []
 
@@ -331,7 +369,22 @@ def validate_model_dict(model, val_dict, train_std, train_mean, plot_results = T
 
 
 def forecast_dict(model, train_dict, start_date, n_forecast = 20):
+    '''
+    
 
+    Parameters
+    ----------
+    model : Fitted TF model 
+    train_dict : training diict
+    start_date : start date of forecast
+    n_forecast : numbeer of periods to forecast
+        DESCRIPTION. The default is 20.
+
+    Returns
+    -------
+    pred_df : df of predictions
+
+    '''
     rng = pd.date_range(start_date, periods=n_forecast, freq='D').astype(str)
     pred_df = pd.DataFrame(columns = train_dict, index=rng)
 
@@ -369,10 +422,6 @@ def forecast_dict(model, train_dict, start_date, n_forecast = 20):
         print('Writing to df')
         pred_df[ent] = X[0][-n_forecast:]  
     return pred_df
-
-
-
-
 
 
 from tensorflow.keras.callbacks import *
