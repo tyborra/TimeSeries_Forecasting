@@ -1,6 +1,6 @@
 # Time Series Forecasting
 ## Summary
-This was my submission for a coding assesment. 
+This is based on three real, but unknown markets. The original code was done as part of a coding assesment. 
 
 ### <u>Part 1</u>
 The primary challenge in this section is the very long forecast time. Most methods and algorithms will go astray when trying to predict this far out. The data contained several features that were largely irrelevant for the task, and some manipulation was required to get the data into a useful format. 
