@@ -426,7 +426,6 @@ def forecast_dict(model, train_dict, start_date, n_forecast = 20):
 
 from tensorflow.keras.callbacks import *
 from tensorflow.keras import backend as K
-#import numpy as np
 
 class CyclicLR(Callback):
     """
