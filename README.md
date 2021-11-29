@@ -1,6 +1,6 @@
 # Time Series Forecasting
 ## Summary
-Part one is forecasting Boston crime data. Part two is based on two real, but unknown equity markets. The original code was done as part of a coding assesment. 
+Boston_Crime_Forecasting is forecasting Boston crime data. Part two is based on two real, but unknown equity markets. The original code was done as part of a coding assesment. 
 
 ### <u>Part 1</u>
 The primary challenge in this section is the very long forecast time. Most methods and algorithms will go astray when trying to predict this far out. The data contained several features that were largely irrelevant for the task, and some manipulation was required to get the data into a useful format. 
