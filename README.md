@@ -1,6 +1,6 @@
 # Time Series Forecasting
 ## Summary
-This is based on three real, but unknown markets. The original code was done as part of a coding assesment. 
+Part one is forecasting Boston crime data. Part two is based on two real, but unknown equity markets. The original code was done as part of a coding assesment. 
 
 ### <u>Part 1</u>
 The primary challenge in this section is the very long forecast time. Most methods and algorithms will go astray when trying to predict this far out. The data contained several features that were largely irrelevant for the task, and some manipulation was required to get the data into a useful format. 
@@ -21,9 +21,3 @@ I chose to use an LSTM RNN implemented with TensorFlow for Market 1. The archite
 ### <u>Market 2</u>
 
 In order to facilitate the reuse of code, I chose to stick with TensorFlow and use a GRU model for market 2. The model architecture consists of four GRU layers each with a dropout, and a dense output layer. I initially used SGD as the optimizer but the gradients exploded on the final model so I switched to rmsprop. I also experimented with a cyclical learning rate callback (https://arxiv.org/abs/1506.01186) and gradient clipping (https://papers.nips.cc/paper/2017/file/f2fc990265c712c49d51a18a32b39f0c-Paper.pdf). This model initially yielded a mean MSE of ~0.004 on the validation data for all entities, but performed poorly on the 20 day test window. The final model yielded a score of 0.1351 on the validation data, but appears to have performed well on the 20 day forecast window.
-
-### <u>To Do</u>
-- Modularity; the code needs to be organized into functions and classes 
-- improve code efficiency, there is too much indexing
-- annotate code
-- tune the GRU model
