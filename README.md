@@ -13,11 +13,11 @@ Market1 and Market 2 were very similar datasets. The data required very little m
 
 The data was converted into rolling 50-day windows with one prediction per window for training and evaluating the models. This method retains the time-series nature of the data and accurately mimics real-world time series forecasting.
 
-The final predictions were made using an autoregressive method with the same rolling 50 period window making one prediction at a time. The prediction is added to the data to make the next prediction.![autoregressive.jfif](attachment:autoregressive.jfif)
+The final predictions were made using an autoregressive method with the same rolling 50 period window making one prediction at a time. The prediction is added to the data to make the next prediction.
 
-### <u>Market 1</u>
+#### <u>Market 1</u>
 I chose to use an LSTM RNN implemented with TensorFlow for Market 1. The architecture consisted of four LSTM layers, each with dropout, a dense output layer, and rmsprop as the optimizer. The result was a mean MSE of ~0.08 on the validation data for all entities, reasonable for the scope of this project. The model appears as though it performed well on the 20 day forecast window.
 
-### <u>Market 2</u>
+#### <u>Market 2</u>
 
 In order to facilitate the reuse of code, I chose to stick with TensorFlow and use a GRU model for market 2. The model architecture consists of four GRU layers each with a dropout, and a dense output layer. I initially used SGD as the optimizer but the gradients exploded on the final model so I switched to rmsprop. I also experimented with a cyclical learning rate callback (https://arxiv.org/abs/1506.01186) and gradient clipping (https://papers.nips.cc/paper/2017/file/f2fc990265c712c49d51a18a32b39f0c-Paper.pdf). This model initially yielded a mean MSE of ~0.004 on the validation data for all entities, but performed poorly on the 20 day test window. The final model yielded a score of 0.1351 on the validation data, but appears to have performed well on the 20 day forecast window.
